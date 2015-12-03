@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"strconv"
 	)
  
 func main() {
@@ -15,7 +14,7 @@ func main() {
 	fmt.Println("Suchen nach Anna")
 	tel, found := book.lookAt("Anna")
 	if found {
-		fmt.Println("Number of Anna is " + strconv.Itoa(tel))	
+		fmt.Println("Number of Anna is ", tel)	
 	}
 	
 	fmt.Println("Suchen nach Marc")

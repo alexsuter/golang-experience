@@ -7,11 +7,10 @@ import (
 	)
  
 func main() {
-	
-	anna := Person{name: "Anna", tel: 147}
-	peter := Person{name: "Peter", tel: 581}
-	
-	book := Book{personen: []Person{anna, peter}} 
+	book := Book{}
+
+	book.add("Anna", 147)
+	book.add("Peter", 581)
 	
 	fmt.Println("Suchen nach Anna")
 	tel, found := book.lookAt("Anna")
@@ -37,11 +36,22 @@ type Person struct {
   tel int
 }
 
-func (book Book) lookAt(name string) (int, bool) {
+func (book *Book) add(name string, tel int) {
+	for _, p := range book.personen {
+    	fmt.Println(p.name)	
+    }
+	book.personen = append(book.personen, Person{name: name, tel: tel})
+	for _, p := range book.personen {
+    	fmt.Println(p.name)	
+    }
+}
+
+func (book *Book) lookAt(name string) (int, bool) {
     for _, p := range book.personen {
     	if strings.EqualFold(p.name, name) {
     		return p.tel, true
     	}
     }
+    
     return 0, false
 }

@@ -7,10 +7,9 @@ import (
 
 func main() {
 
-	fruits := make(chan string, 1000)
+	fruits := make(chan string, 10000)
 
-	for i := 1; i <= 10; i++ {
-		time.Sleep(time.Millisecond * 600)
+	for i := 1; i <= 100; i++ {
 		go eater(i, fruits)
 	}
 
@@ -28,13 +27,13 @@ func picker(fruit string, fruits chan<- string, timeToPick int) {
 	for {
 		fmt.Println("Pick ", fruit)
 		fruits <- fruit
-		time.Sleep(time.Duration(timeToPick) * time.Second)
+		time.Sleep(time.Duration(timeToPick) * time.Millisecond)
 	}
 }
 
 func eater(i int, fruits <-chan string) {
 	for fruit := range fruits {
 		fmt.Println("Esser ", i, "Mhmmm ", fruit)
-		time.Sleep(time.Second * 8)
+		time.Sleep(time.Millisecond * 8)
 	}
 }
